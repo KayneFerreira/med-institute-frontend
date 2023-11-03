@@ -1,5 +1,5 @@
 import React from 'react'
-import ClientForms from '../components/ClientForms'
+import FormsClient from '../components/FormsClient'
 
 const ClientRegister = () => {
   return (
@@ -7,7 +7,7 @@ const ClientRegister = () => {
       <h1 className='text-center py-4'>
         Registrar Paciente
       </h1>
-      <ClientForms />
+      <FormsClient />
     </div>
   )
 }

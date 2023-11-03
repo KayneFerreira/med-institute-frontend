@@ -1,5 +1,5 @@
 import React from 'react'
-import DoctorForms from '../components/DoctorForms'
+import FormsDoctor from '../components/FormsDoctor'
 
 const DoctorRegister = () => {
   return (
@@ -7,7 +7,7 @@ const DoctorRegister = () => {
       <h1 className='text-center py-4'>
         Registrar Medico
       </h1>
-      <DoctorForms />
+      <FormsDoctor />
     </div>
   )
 }

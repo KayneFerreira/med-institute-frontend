@@ -70,7 +70,7 @@ const Navbar = () => {
               </button>
               <ul className="dropdown-menu dropdown-menu-dark">
                 <li className="nav-item">
-                  <Link className="nav-link" aria-current="page" href="/">
+                  <Link className="nav-link" aria-current="page" href="/agendar-consulta">
                     Agendar Consulta
                   </Link>
                 </li>

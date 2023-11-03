@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 
+
 const TableClient = () => {
   const [data, setData] = useState([]);
 
@@ -35,7 +36,33 @@ const TableClient = () => {
             <td>{paciente.dataNascimento}</td>
             <td>{paciente.telefone}</td>
             <td>{paciente.email}</td>
-            <td></td>
+            <td>
+              <button 
+              className='btn btn-success btn-sm' 
+              data-bs-toggle="modal" 
+              data-bs-target="#detailsClient">
+                Detalhes/Editar
+              </button>
+              <button className='btn btn-danger btn-sm mx-2'>Excluir</button>
+              
+              <div className="modal fade" id="detailsClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h1 className="modal-title fs-5" id="exampleModalLabel">Detalhes do Paciente</h1>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      ...
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                      <button type="button" className="btn btn-primary">Editar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
           </tr>
         ))}
       </tbody>

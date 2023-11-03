@@ -37,7 +37,10 @@ const TableDoctor = () => {
             <td>{medico.sexo}</td>
             <td>{medico.telefone}</td>
             <td>{medico.email}</td>
-            <td></td>
+            <td>
+              <button className='btn btn-success btn-sm'>Detalhes/Editar</button>
+              <button className='btn btn-danger btn-sm mx-2'>Excluir</button>
+            </td>
           </tr>
         ))}
       </tbody>

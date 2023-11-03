@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 
 
-const DoctorForms = () => {
+const FormsDoctor = () => {
   const [data, setData] = useState({
     nome: '',
     cpf: '',
@@ -125,4 +125,4 @@ const DoctorForms = () => {
   );
 }
 
-export default DoctorForms
+export default FormsDoctor

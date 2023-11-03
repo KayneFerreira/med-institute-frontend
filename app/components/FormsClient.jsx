@@ -3,10 +3,10 @@ import React from "react";
 import { useState } from "react";
 import { InputMask } from 'primereact/inputmask';
 import { estados } from "../resources/Content";
-import { fieldAlert, insertFailed, insertSuccess } from "./Alerts";
+import { insertFailed, insertSuccess } from "./Alerts";
 
 
-const ClientForms = () => {
+const FormsClient = () => {
   const [data, setData] = useState({
     nome: '',
     cpf: '',
@@ -160,4 +160,4 @@ const ClientForms = () => {
   );
 };
 
-export default ClientForms;
+export default FormsClient;
