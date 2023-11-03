@@ -9,8 +9,8 @@ export default function Home() {
   })
   
   return (
-    <div className='row container align-items-center py-5'>
-      <div className="col-6 px-5 text-end">
+    <div className='container d-flex flex-wrap-reverse start-50 align-items-center py-5'>
+      <div className="px-5 text-lg-end text-center">
         <h1>Instituto Med Center</h1>
         <h5>Medicina de qualidade ao seu alcance.</h5>
         <div>
@@ -18,7 +18,7 @@ export default function Home() {
           <Link className="btn btn-secondary my-3" href="/agendar-consulta">Agendar Consulta</Link>
         </div>
       </div>
-      <div className="col-6">
+      <div>
         <Image 
           src="/images/stock_01.png"
           width={500}

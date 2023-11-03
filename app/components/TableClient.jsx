@@ -1,17 +1,39 @@
 'use client'
 import React from 'react'
 import { useState, useEffect } from "react";
+import { deleteFailed, deletePrompt } from './Alerts';
 
 
 const TableClient = () => {
-  const [data, setData] = useState([]);
+  const url = "http://localhost:8080/api/v4/test/pacientes"
 
+  const [data, setData] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:8080/api/v4/test/pacientes")
+    fetch(url)
       .then((response) => response.json())
       .then((data) => setData(data))
       .catch((error) => console.error(error));
   }, []);
+
+
+  const deleteById = async (id) => {
+    console.log(id)
+    await fetch(url + '/' + id, {
+      method: 'DELETE'
+    })
+    .then((response) => {
+      const status = response.status
+      if (status >= 200 && status < 300) {
+        deletePrompt()
+      }
+      else {
+        deleteFailed(status)
+      }
+    })
+    .then((data) => { console.log(data); })
+    .catch((error) => { console.error(error); });
+  }
+
 
   return (
     <table className="table table-striped">
@@ -30,7 +52,7 @@ const TableClient = () => {
       <tbody>
         {data.map((paciente) => (
           <tr key={paciente.id}>
-            <th>{paciente.id}</th>
+            <th id='clientId'>{paciente.id}</th>
             <td>{paciente.nome}</td>
             <td>{paciente.sexo}</td>
             <td>{paciente.dataNascimento}</td>
@@ -43,9 +65,13 @@ const TableClient = () => {
               data-bs-target="#detailsClient">
                 Detalhes/Editar
               </button>
-              <button className='btn btn-danger btn-sm mx-2'>Excluir</button>
+              <button 
+              className='btn btn-danger btn-sm mx-2' 
+              onClick={() => deleteById(paciente.id)}>
+                Excluir
+              </button>
               
-              <div className="modal fade" id="detailsClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal fade" id="detailsClient" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                   <div className="modal-content">
                     <div className="modal-header">
