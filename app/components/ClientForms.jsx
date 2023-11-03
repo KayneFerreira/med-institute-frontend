@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { InputMask } from 'primereact/inputmask';
 import { estados } from "../resources/Content";
+import { fieldAlert, insertFailed, insertSuccess } from "./Alerts";
 
 
 const ClientForms = () => {
@@ -37,7 +38,15 @@ const ClientForms = () => {
       },
       body: jsonData,
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          response.json()
+          insertSuccess()
+        }
+        else {
+          insertFailed(response.status)
+        }
+      })
       .then((data) => { console.log(data); })
       .catch((error) => { console.error(error); });
   };
@@ -59,13 +68,13 @@ const ClientForms = () => {
             value={data.dataNascimento} 
             onChange={handleChange} 
             mask="99/99/9999" 
-            placeholder="99/99/9999"
+            placeholder="Data de Nascimento"
           />
           <label htmlFor="dataNascimento">Data de Nascimento</label>
         </div>
         <div className="form-floating col-2">
           <select type="text" className="form-select" name="sexo" value={data.sexo} onChange={handleChange}>
-            <option value=""></option>
+            <option value="">--Escolha o Sexo--</option>
             <option value="M">Masculino</option>
             <option value="F">Feminino</option>
           </select>
@@ -78,7 +87,7 @@ const ClientForms = () => {
             value={data.cpf} 
             onChange={handleChange} 
             mask="999.999.999-99" 
-            placeholder="999.999.999-99" 
+            placeholder="CPF" 
           />
           <label htmlFor="cpf">CPF</label>
         </div>
@@ -92,7 +101,7 @@ const ClientForms = () => {
             value={data.telefone} 
             onChange={handleChange} 
             mask="(+9999) 99999-9999" 
-            placeholder="(+9999) 99999-9999" 
+            placeholder="Telefone/Celular" 
           />
           <label htmlFor="telefone">Telefone/Celular</label>
         </div>
@@ -108,7 +117,7 @@ const ClientForms = () => {
           <label>Endereço</label>
         </div>
         <div className="form-floating col-sm-2">
-          <input type="text" className="form-control" name="numero" placeholder="Número" value={data.numero} onChange={handleChange} />
+          <input type="number" className="form-control" name="numero" placeholder="Número" value={data.numero} onChange={handleChange} />
           <label>Número</label>
         </div>
         <div className="form-floating col-sm-3">
@@ -118,25 +127,25 @@ const ClientForms = () => {
             value={data.cep} 
             onChange={handleChange} 
             mask="99999-999" 
-            placeholder="99999-999" 
+            placeholder="CEP" 
           />
           <label>CEP</label>
         </div>
       </div>
 
       <div className="row g-2 mb-4 d-flex justify-content-center">
-        <div className="form-floating col-sm-6">
-          <input type="text" className="form-control" name="cidade" placeholder="Cidade" value={data.cidade} onChange={handleChange} />
-          <label>Cidade</label>
-        </div>
         <div className="form-floating col-sm-4">
           <select type="text" className="form-select" name="estado" value={data.estado} onChange={handleChange}>
-            <option value=""></option>
+            <option value="">--Escolha o Estado--</option>
             {estados.map((value, i) => {
               return <option value={value}>{value}</option>
             })}
           </select>
           <label>Estado</label>
+        </div>
+        <div className="form-floating col-sm-6">
+          <input type="text" className="form-control" name="cidade" placeholder="Cidade" value={data.cidade} onChange={handleChange} />
+          <label>Cidade</label>
         </div>
       </div>
 

@@ -4,10 +4,10 @@ import React from "react";
 const Navbar = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg bg-dark border-bottom border-body"
+      className="navbar navbar-expand-lg bg-dark border-bottom border-body mb-5"
       data-bs-theme="dark"
     >
-      <div className="container-fluid">
+      <div className="container-fluid px-4">
         <Link className="navbar-brand" href="/">
           Instituto Med Center
         </Link>
@@ -22,11 +22,14 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+      </div>
+
+
+      <div className="collapse navbar-collapse px-4" id="navbarNavDropdown">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link" aria-current="page" href="/">
-                Home
+              <Link className="nav-link text-light text-nowrap" aria-current="page" href="/">
+                Página Inicial
               </Link>
             </li>
 
@@ -83,10 +86,8 @@ const Navbar = () => {
                 </li>
               </ul>
             </li>
-
           </ul>
         </div>
-      </div>
     </nav>
   );
 };

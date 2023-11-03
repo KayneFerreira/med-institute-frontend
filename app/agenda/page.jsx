@@ -5,7 +5,7 @@ const RegistrarConsulta = async () => {
   return (
     <div>
       <h1 className="text-center py-5">
-        Agenda de Consultas
+        Consultas Marcadas
       </h1>
       <TableAppointment />
     </div>
