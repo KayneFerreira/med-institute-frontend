@@ -1,5 +1,4 @@
 import React from 'react'
-import TableDoctor from '../components/TableDoctor'
 
 const ListDoctors = async () => {
   return (
@@ -7,7 +6,6 @@ const ListDoctors = async () => {
       <h1 className='text-center py-4'>
         Lista de Medicos
       </h1>
-      <TableDoctor />
     </div>
   )
 }

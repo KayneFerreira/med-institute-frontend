@@ -8,6 +8,7 @@ import { insertFailed, insertSuccess } from "./Alerts";
 
 const FormsClient = () => {
   const [data, setData] = useState({
+    id: '',
     nome: '',
     cpf: '',
     telefone: '',
