@@ -24,12 +24,6 @@ const ListClient = () => {
 
 
   /**
-   * Handle edit/update
-   */
-
-
-
-  /**
    * Delete request
    */
   const handleDelete = async (id, nome) => {
@@ -126,7 +120,23 @@ const ListClient = () => {
                 <Link 
                 type="button" 
                 className="btn btn-success btn-sm mx-2" 
-                href='/atualizar-paciente'>
+                href={{
+                  pathname: '/atualizar-paciente',
+                  query: {
+                    id: paciente.id,
+                    nome: paciente.nome,
+                    dataNascimento: paciente.dataNascimento,
+                    sexo: paciente.sexo,
+                    cpf: paciente.cpf,
+                    telefone: paciente.telefone,
+                    email: paciente.email,
+                    endereco: paciente.endereco,
+                    numero: paciente.numero,
+                    cep: paciente.cep,
+                    estado: paciente.estado,
+                    cidade: paciente.cidade
+                  }
+                }}>
                   Editar
                 </Link>
 

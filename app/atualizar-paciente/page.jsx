@@ -1,16 +1,28 @@
 'use client'
-import React from "react";
 import { useState } from "react";
 import { InputMask } from 'primereact/inputmask';
 import { estados } from "../resources/Content";
 import { insertFailed, insertSuccess } from "../components/Alerts"
 
-const ClientUpdate = () => {
+const ClientUpdate = ({ searchParams }) => {
   const url = 'http://localhost:8080/api/v4/test/pacientes'
   
-  const [data, setData] = useState({})
+  const [data, setData] = useState({
+    id: searchParams.id,
+    nome: searchParams.nome,
+    cpf: searchParams.cpf,
+    sexo: searchParams.sexo,
+    dataNascimento: searchParams.dataNascimento,
+    email: searchParams.email,
+    telefone: searchParams.telefone,
+    endereco: searchParams.endereco,
+    numero: searchParams.numero,
+    cep: searchParams.cep,
+    cidade: searchParams.cidade,
+    estado: searchParams.estado
+  })
   const [filteredData, setFilteredData] = useState({})
-
+  console.log('NOME: ' + searchParams.nome + ' - ID: ' + searchParams.id)
 
   /**
    * Handle input change from forms
@@ -29,8 +41,8 @@ const ClientUpdate = () => {
     e.preventDefault();
     filterData()
     const jsonData = JSON.stringify(filteredData);
-    await fetch(url, {
-      method: 'POST',
+    await fetch(`${url}/${searchParams.id}`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -77,8 +89,8 @@ const ClientUpdate = () => {
       <form className="px-4" onSubmit={handleSubmit}>
         <div className="row g-2 mb-4 d-flex justify-content-center">
           <div className="form-floating d-flex justify-content-center col-sm-10">
-              <input name="nome" id="nome" type="text" className="form-control" placeholder="Nome Completo" value={data.nome} onChange={handleChange} />
-              <label htmlFor="nome">Nome Completo</label>
+            <input name="nome" id="nome" type="text" className="form-control" placeholder="Nome Completo" value={data.nome} onChange={handleChange} />
+            <label htmlFor="nome">Nome Completo</label>
           </div>
         </div>
         <div className="row g-2 mb-4 d-flex justify-content-center">
