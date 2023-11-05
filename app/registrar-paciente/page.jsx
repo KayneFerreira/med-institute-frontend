@@ -70,8 +70,8 @@ const ClientRegister = () => {
 
   return (
     <div>
-      <h1 className='text-center py-4'>
-        Registrar Paciente
+      <h1 className="text-center py-4">
+        Atualizar Paciente
       </h1>
       
       <form className="px-4" onSubmit={onClick}>

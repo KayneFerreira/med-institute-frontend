@@ -5,6 +5,7 @@ import { actionCancelled, deleteFailed, deleteSuccess } from '../components/Aler
 import Swal from "sweetalert2"
 import Link from 'next/link';
 import { toTitleCase } from '../components/Util';
+import ClientUpdate from '../atualizar-paciente/page';
 
 
 const ListClient = () => {
@@ -71,6 +72,15 @@ const ListClient = () => {
 
 
   /**
+   * Send object data to another route
+   * !!! TODO
+   */
+  const sendData = (data) => {
+    
+  }
+
+
+  /**
    * Set client details
    */
   const [item, setItem] = useState()
@@ -120,7 +130,8 @@ const ListClient = () => {
                 <Link 
                 type="button" 
                 className="btn btn-success btn-sm mx-2" 
-                href='/atualizar-paciente'>
+                href='/atualizar-paciente'
+                onClick={() => sendData(paciente)}>
                   Editar
                 </Link>
 
