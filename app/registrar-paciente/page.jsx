@@ -71,7 +71,7 @@ const ClientRegister = () => {
   return (
     <div>
       <h1 className="text-center py-4">
-        Atualizar Paciente
+        Registrar Paciente
       </h1>
       
       <form className="px-4" onSubmit={onClick}>
