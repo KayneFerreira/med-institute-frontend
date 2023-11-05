@@ -22,7 +22,6 @@ const ClientUpdate = ({ searchParams }) => {
     estado: searchParams.estado
   })
   const [filteredData, setFilteredData] = useState({})
-  console.log('NOME: ' + searchParams.nome + ' - ID: ' + searchParams.id)
 
   /**
    * Handle input change from forms
@@ -40,6 +39,7 @@ const ClientUpdate = ({ searchParams }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     filterData()
+    console.log('TEST DATA: ' + filteredData.nome) // !!! TEST
     const jsonData = JSON.stringify(filteredData);
     await fetch(`${url}/${searchParams.id}`, {
       method: 'PUT',
@@ -49,12 +49,15 @@ const ClientUpdate = ({ searchParams }) => {
       body: jsonData,
     })
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
+        const status = response.status
+        if (status >= 200 && status < 300) {
           response.json()
           insertSuccess()
+          console.log('RESPONSE STATUS: ' + status)
         }
         else {
-          insertFailed(response.status)
+          insertFailed(status)
+          console.log('RESPONSE STATUS: ' + status)
         }
       })
       .then((data) => { console.log(data); })
