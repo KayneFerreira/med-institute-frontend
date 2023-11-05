@@ -3,6 +3,8 @@ import React from 'react'
 import { useState, useEffect } from "react";
 import { actionCancelled, deleteFailed, deleteSuccess } from '../components/Alerts';
 import Swal from "sweetalert2"
+import Link from 'next/link';
+import { toTitleCase } from '../components/Util';
 
 
 const ListClient = () => {
@@ -108,15 +110,22 @@ const ListClient = () => {
               <td>
                 <button 
                 id='btnClientDetails'
-                className='btn btn-success btn-sm' 
+                className='btn btn-primary btn-sm' 
                 data-bs-toggle="modal" 
                 data-bs-target="#clientDetails"
                 onClick={() => clientDetails(paciente)}>
-                  Detalhes/Editar
+                  Detalhes
                 </button>
 
+                <Link 
+                type="button" 
+                className="btn btn-success btn-sm mx-2" 
+                href='/atualizar-paciente'>
+                  Editar
+                </Link>
+
                 <button 
-                className='btn btn-danger btn-sm mx-2' 
+                className='btn btn-danger btn-sm' 
                 onClick={() => deletePrompt(paciente.id, paciente.nome)}>
                   Excluir
                 </button>
@@ -131,22 +140,17 @@ const ListClient = () => {
                         </div>
                         <div className="modal-body">
                           <div>
-                            Nome: {item.nome} <br />
-                            Sexo: {item.sexo} <br />
-                            Data de Nascimento: {item.dataNascimento} <br />
-                            CPF: {item.cpf} <br />
-                            Telefone: {item.telefone} <br />
-                            Email: {item.email} <br />
-                            Endereço: {item.endereco} <br />
-                            Número: {item.numero} <br />
-                            CEP: {item.cep} <br />
-                            Cidade: {item.cidade} <br />
-                            Estado: {item.estado} <br />
+                            <ul>
+                              {Object.keys(item).map((key, i) => {
+                                return <li key={i}>
+                                  <b>{toTitleCase(key)}</b>: {item[key]}
+                                </li> 
+                              })}
+                            </ul>
                           </div>
                         </div>
                         <div className="modal-footer">
                           <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                          <button type="button" className="btn btn-primary">Editar</button>
                         </div>
                       </div>
                     )}

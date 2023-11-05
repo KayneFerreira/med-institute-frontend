@@ -8,31 +8,27 @@ import { insertFailed, insertSuccess } from "../components/Alerts"
 const ClientRegister = () => {
   const url = 'http://localhost:8080/api/v4/test/pacientes'
   
-  const [data, setData] = useState({
-    id: '',
-    nome: '',
-    cpf: '',
-    telefone: '',
-    email: '',
-    dataNascimento: '',
-    sexo: '',
-    endereco: '',
-    numero: '',
-    cep: '',
-    cidade: '',
-    estado: ''
-  })
+  const [data, setData] = useState({})
+  const [filteredData, setFilteredData] = useState({})
 
 
+  /**
+   * Handle input change from forms
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({ ...data, [name]: value });
   };
-  
 
+
+  /**
+   * Handle click event
+   * POST request
+   */
   const onClick = async (e) => {
     e.preventDefault();
-    const jsonData = JSON.stringify(data);
+    filterData()
+    const jsonData = JSON.stringify(filteredData);
     await fetch(url, {
       method: 'POST',
       headers: {
@@ -52,6 +48,24 @@ const ClientRegister = () => {
       .then((data) => { console.log(data); })
       .catch((error) => { console.error(error); });
   };
+
+
+  /**
+   * Filter special charaters from inserted data
+   */
+  const filterData = () => {
+    const newData = {};
+    for (const key in data) {
+      const value = data[key];
+      if (key === 'cpf' || key === 'telefone' || key === 'cep') {
+        newData[key] = value.replace(/[^\w]/gi, '');
+      }
+      else {
+        newData[key] = value
+      }
+    }
+    setFilteredData(newData);
+  }
 
 
   return (
