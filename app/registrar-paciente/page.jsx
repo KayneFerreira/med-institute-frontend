@@ -1,14 +1,27 @@
 'use client'
 import React from "react";
 import { useState } from "react";
-import { InputMask } from 'primereact/inputmask';
+import { InputMask } from "primereact/inputmask";
 import { estados } from "../resources/Content";
 import { insertFailed, insertSuccess } from "../components/Alerts"
+
 
 const ClientRegister = () => {
   const url = 'http://localhost:8080/api/v4/test/pacientes'
   
-  const [data, setData] = useState({})
+  const [data, setData] = useState({
+    nome: '',
+    cpf: '',
+    sexo: '',
+    dataNascimento: '',
+    email: '',
+    telefone: '',
+    endereco: '',
+    numero: '',
+    cep: '',
+    cidade: '',
+    estado: '',
+  })
   const [filteredData, setFilteredData] = useState({})
 
 
@@ -17,7 +30,7 @@ const ClientRegister = () => {
    */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setData({ ...data, [name]: value });l
+    setData({ ...data, [name]: value });
   };
 
 
@@ -37,7 +50,7 @@ const ClientRegister = () => {
       body: jsonData,
     })
       .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
+        if (response.status === 201) {
           response.json()
           insertSuccess()
         }
@@ -71,7 +84,7 @@ const ClientRegister = () => {
   return (
     <div>
       <h1 className="text-center py-4">
-        Registrar Paciente
+        Registro de Paciente
       </h1>
       
       <form className="px-4" onSubmit={onClick}>

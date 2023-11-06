@@ -1,8 +1,10 @@
 'use client'
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { InputMask } from 'primereact/inputmask';
+import { InputMask } from "primereact/inputmask";
 import { estados } from "../resources/Content";
-import { insertFailed, insertSuccess } from "../components/Alerts"
+import { updateFailed, updateSuccess } from "../components/Alerts"
+
 
 const ClientUpdate = ({ searchParams }) => {
   const url = 'http://localhost:8080/api/v4/test/pacientes'
@@ -23,6 +25,11 @@ const ClientUpdate = ({ searchParams }) => {
   })
   const [filteredData, setFilteredData] = useState({})
 
+  useEffect(() => {
+    setFilteredData(searchParams)
+  }, [])
+
+
   /**
    * Handle input change from forms
    */
@@ -38,8 +45,12 @@ const ClientUpdate = ({ searchParams }) => {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log()
+    console.log('TEST UNFILTERED DATA: ' + data.nome)
     filterData()
-    console.log('TEST DATA: ' + filteredData.nome) // !!! TEST
+    console.log('TEST FILTERED DATA: ' + filteredData.nome)
+
     const jsonData = JSON.stringify(filteredData);
     await fetch(`${url}/${searchParams.id}`, {
       method: 'PUT',
@@ -49,15 +60,12 @@ const ClientUpdate = ({ searchParams }) => {
       body: jsonData,
     })
       .then((response) => {
-        const status = response.status
-        if (status >= 200 && status < 300) {
+        if (response.status === 200) {
           response.json()
-          insertSuccess()
-          console.log('RESPONSE STATUS: ' + status)
+          updateSuccess()
         }
         else {
-          insertFailed(status)
-          console.log('RESPONSE STATUS: ' + status)
+          updateFailed(response.status)
         }
       })
       .then((data) => { console.log(data); })
@@ -69,24 +77,31 @@ const ClientUpdate = ({ searchParams }) => {
    * Filter special charaters from inserted data
    */
   const filterData = () => {
+    console.log('Filtrando dados...')
     const newData = {};
     for (const key in data) {
       const value = data[key];
       if (key === 'cpf' || key === 'telefone' || key === 'cep') {
         newData[key] = value.replace(/[^\w]/gi, '');
+        console.log('Valor original: ' + value)
+        console.log('Valor filtrado: ' + newData[key])
       }
       else {
         newData[key] = value
+        console.log('Valor ignorado: ' + newData[key])
       }
     }
     setFilteredData(newData);
+    console.log('Teste novo objeto: ' + newData.cpf)
+    console.log('Teste state: ' + data.cpf)
+    console.log('Teste state filtered: ' + filteredData.cpf)
   }
 
 
   return (
     <div>
       <h1 className="text-center py-4">
-        Atualizar Paciente
+        Editar Paciente
       </h1>
       
       <form className="px-4" onSubmit={handleSubmit}>
@@ -192,7 +207,7 @@ const ClientUpdate = ({ searchParams }) => {
         <div className="d-flex justify-content-center">
           <div className="d-grid col-10">
             <button type="submit" className="btn btn-primary btn-lg">
-                Registrar Paciente
+                Atualizar Paciente
             </button>
           </div>
         </div>

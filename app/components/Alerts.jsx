@@ -19,6 +19,24 @@ export const insertFailed = (status) => {
 }
 
 
+export const updateSuccess = () => {
+  Swal.fire({
+    title: "Sucesso!",
+    text: "O registro foi atualizado com sucesso!",
+    icon: "success",
+  })
+}
+
+
+export const updateFailed = (status) => {
+  Swal.fire({
+    title: "Ocorreu um erro!",
+    text: "Falha ao tentar atualizar o registro. ERRO: " + status,
+    icon: "error",
+  })
+}
+
+
 export const deleteSuccess = (nome) => {
   Swal.fire(
     'Sucesso!',
