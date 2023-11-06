@@ -108,6 +108,22 @@ const ListClient = () => {
               <td>{paciente.telefone}</td>
               <td>{paciente.email}</td>
               <td>
+
+              <Link 
+                type="button" 
+                className="btn btn-warning btn-sm mx-2" 
+                href={{
+                  pathname: '/agendar-consulta',
+                  query: {
+                    id: paciente.id,
+                    nome: paciente.nome,
+                    dataNascimento: paciente.dataNascimento,
+                    sexo: paciente.sexo,
+                  }
+                }}>
+                  Marcar Consulta
+                </Link>
+
                 <button 
                 id='btnClientDetails'
                 className='btn btn-primary btn-sm' 
