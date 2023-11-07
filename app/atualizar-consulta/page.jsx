@@ -108,7 +108,7 @@ const AppointmentUpdate = ({ searchParams }) => {
   return (
     <div>
       <h1 className="text-center py-4">
-        Registro de Consulta
+        Editar Consulta
       </h1>
       
       <form className="px-4" onSubmit={onClick}>

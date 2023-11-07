@@ -63,7 +63,7 @@ const AppointmentRegister = ({ searchParams }) => {
     e.preventDefault();
     testData()
     const jsonData = JSON.stringify(data);
-    await fetch(`${urlConsulta}/${data.id}`, {
+    await fetch(urlConsulta, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
