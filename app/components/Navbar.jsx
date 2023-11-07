@@ -41,7 +41,7 @@ const Navbar = () => {
               >
                 Agenda/Listas
               </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
+              <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                 <li className="nav-item">
                   <Link className="nav-link" aria-current="page" href="/agenda">
                     Agenda
@@ -66,14 +66,9 @@ const Navbar = () => {
                 data-bs-toggle="dropdown" 
                 aria-expanded="false"
               >
-                Agendamento/Registro
+                Registros
               </button>
-              <ul className="dropdown-menu dropdown-menu-dark">
-                <li className="nav-item">
-                  <Link className="nav-link" aria-current="page" href="/agendar-consulta">
-                    Agendar Consulta
-                  </Link>
-                </li>
+              <ul className="dropdown-menu dropdown-menu-dark dropdown-menu-end">
                 <li className="nav-item">
                   <Link className="nav-link" aria-current="page" href="/registrar-paciente">
                     Registrar Paciente

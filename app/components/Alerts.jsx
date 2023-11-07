@@ -51,7 +51,6 @@ export const deleteFailed = (status) => {
     title: "Não foi possível remover o registro.",
     text: " ERRO: " + status,
     icon: "error",
-    button: "OK"
   })
 }
 

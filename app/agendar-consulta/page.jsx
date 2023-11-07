@@ -8,15 +8,17 @@ import { insertFailed, insertSuccess } from "../components/Alerts"
 const AppointmentRegister = ({ searchParams }) => {
   const urlConsulta = 'http://localhost:8080/api/v4/test/consultas'
   const urlMedico = 'http://localhost:8080/api/v4/test/medicos'
-  const urlPaciente = 'http://localhost:8080/api/v4/test/pacientes'
   
   const [data, setData] = useState({
-    id: searchParams.id,
-    nome: searchParams.nome,
-    sexo: searchParams.sexo,
-    dataNascimento: searchParams.dataNascimento,
+    paciente: searchParams.id,
+    medico: '',
+    data: '',
+    hora: '',
+    formaPagamento: '',
+    valor: '',
+    convenio: '',
+    numeroCarteira: '',
   })
-  const [filteredData, setFilteredData] = useState({})
   
   const [medicos, setMedico] = useState({})
   const [especialidade, setEspecialidade] = useState("");
@@ -42,14 +44,26 @@ const AppointmentRegister = ({ searchParams }) => {
   };
 
 
+  // !!! TEST FUNCTION
+  const testData = () => {
+    for (const key in data) {
+      console.log(`${key}: ${data[key]}`)
+    }
+    // for (const key in filteredData) {
+    //   console.log(`${key}: ${filteredData[key]}`)
+    // }
+  }
+
+
   /**
    * Handle click event
    * POST request
    */
   const onClick = async (e) => {
     e.preventDefault();
-    const jsonData = JSON.stringify(filteredData);
-    await fetch(urlConsulta, {
+    testData()
+    const jsonData = JSON.stringify(data);
+    await fetch(`${urlConsulta}/${data.id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -125,10 +139,11 @@ const AppointmentRegister = ({ searchParams }) => {
 
           <div className="form-floating col-sm-6">
             <select 
-            name="nomeMedico" 
-            id="nomeMedico" type="text" 
+            name="medico" 
+            id="medico" 
             className="form-control" 
             placeholder="Nome do Médico" 
+            value={data.medico}
             onChange={handleChange}>
               <option value="">-- Escolha o Medico Especialista --</option>
               {Object.keys(medicos)
@@ -137,7 +152,7 @@ const AppointmentRegister = ({ searchParams }) => {
                   <option key={i} value={medicos[key].id}>{medicos[key].nome}</option>
               ))}
             </select>
-            <label htmlFor="nomeMedico">Nome do Médico</label>
+            <label htmlFor="medico">Nome do Médico</label>
           </div>
         </div>
         )}

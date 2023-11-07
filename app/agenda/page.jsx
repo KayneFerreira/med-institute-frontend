@@ -109,7 +109,7 @@ const AppointmentList = () => {
               <td>
                 <button 
                 id='btnClientDetails'
-                className='btn btn-primary btn-sm' 
+                className='btn btn-success btn-sm' 
                 data-bs-toggle="modal" 
                 data-bs-target="#appointmentDetails"
                 onClick={() => appointmentDetails(consulta)}>
@@ -118,11 +118,21 @@ const AppointmentList = () => {
 
                 <Link 
                 type="button" 
-                className="btn btn-success btn-sm mx-2" 
+                className="btn btn-warning btn-sm mx-2" 
                 href={{
                   pathname: '/atualizar-consulta',
                   query: {
-                    // ! TODO
+                    id: consulta.id,
+                    nomePaciente: consulta.paciente.nome,
+                    sexo: consulta.paciente.sexo,
+                    nomeMedico: consulta.medico.nome,
+                    especialidade: consulta.medico.especialidade,
+                    data: consulta.data,
+                    hora: consulta.hora,
+                    formaPagamento: consulta.formaPagamento,
+                    valor: consulta.valor,
+                    convenio: consulta.convenio,
+                    numeroCarteira: consulta.numeroCarteira
                   }
                 }}>
                   Editar

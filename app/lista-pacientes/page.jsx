@@ -84,8 +84,7 @@ const ListClient = () => {
       <h1 className='text-center py-4'>
         Lista de Pacientes
       </h1>
-
-      <table className="table table-striped">
+      <table className="table table-striped container">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -111,7 +110,7 @@ const ListClient = () => {
 
               <Link 
                 type="button" 
-                className="btn btn-warning btn-sm mx-2" 
+                className="btn btn-primary btn-sm mx-2" 
                 href={{
                   pathname: '/agendar-consulta',
                   query: {
@@ -126,7 +125,7 @@ const ListClient = () => {
 
                 <button 
                 id='btnClientDetails'
-                className='btn btn-primary btn-sm' 
+                className='btn btn-success btn-sm' 
                 data-bs-toggle="modal" 
                 data-bs-target="#clientDetails"
                 onClick={() => clientDetails(paciente)}>
@@ -135,7 +134,7 @@ const ListClient = () => {
 
                 <Link 
                 type="button" 
-                className="btn btn-success btn-sm mx-2" 
+                className="btn btn-warning btn-sm mx-2" 
                 href={{
                   pathname: '/atualizar-paciente',
                   query: {

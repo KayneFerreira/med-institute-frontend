@@ -112,7 +112,7 @@ const ListDoctors = () => {
               <td>
                 <button 
                 id='btnMedicDetails'
-                className='btn btn-primary btn-sm' 
+                className='btn btn-success btn-sm' 
                 data-bs-toggle="modal" 
                 data-bs-target="#medicDetails"
                 onClick={() => medicDetails(medico)}>
@@ -121,7 +121,7 @@ const ListDoctors = () => {
 
                 <Link 
                 type="button" 
-                className="btn btn-success btn-sm mx-2" 
+                className="btn btn-warning btn-sm mx-2" 
                 href={{
                   pathname: '/atualizar-medico',
                   query: {

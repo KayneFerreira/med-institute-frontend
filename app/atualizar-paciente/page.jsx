@@ -1,6 +1,6 @@
 'use client'
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { InputMask } from "primereact/inputmask";
 import { estados } from "../resources/Content";
 import { updateFailed, updateSuccess } from "../components/Alerts"
@@ -41,16 +41,11 @@ const ClientUpdate = ({ searchParams }) => {
 
   /**
    * Handle click event
-   * POST request / submit form
+   * PUT request / submit form
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log()
-    console.log('TEST UNFILTERED DATA: ' + data.nome)
     filterData()
-    console.log('TEST FILTERED DATA: ' + filteredData.nome)
-
     const jsonData = JSON.stringify(filteredData);
     await fetch(`${url}/${searchParams.id}`, {
       method: 'PUT',
@@ -77,24 +72,17 @@ const ClientUpdate = ({ searchParams }) => {
    * Filter special charaters from inserted data
    */
   const filterData = () => {
-    console.log('Filtrando dados...')
     const newData = {};
     for (const key in data) {
       const value = data[key];
       if (key === 'cpf' || key === 'telefone' || key === 'cep') {
         newData[key] = value.replace(/[^\w]/gi, '');
-        console.log('Valor original: ' + value)
-        console.log('Valor filtrado: ' + newData[key])
       }
       else {
         newData[key] = value
-        console.log('Valor ignorado: ' + newData[key])
       }
     }
     setFilteredData(newData);
-    console.log('Teste novo objeto: ' + newData.cpf)
-    console.log('Teste state: ' + data.cpf)
-    console.log('Teste state filtered: ' + filteredData.cpf)
   }
 
 
