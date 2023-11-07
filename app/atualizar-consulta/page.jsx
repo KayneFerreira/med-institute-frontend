@@ -11,8 +11,8 @@ const AppointmentUpdate = ({ searchParams }) => {
   
   const [data, setData] = useState({
     id: searchParams.id,
-    nomePaciente: searchParams.nomePaciente,
-    sexo: searchParams.sexo,
+    paciente: {id: searchParams.pacienteId},
+    medico: {id: searchParams.medicoId},
     nomeMedico: searchParams.nomeMedico,
     especialidade: searchParams.especialidade,
     data: searchParams.data,
@@ -41,7 +41,11 @@ const AppointmentUpdate = ({ searchParams }) => {
     const { name, value } = e.target;
     if (name === "especialidade") {
       setEspecialidade(value);
-    } else {
+    }
+    else if (name === "medico") {
+      setData({ ...data, medico: { id: value } });
+    } 
+    else {
       setData({ ...data, [name]: value });
     }
   };
@@ -52,9 +56,8 @@ const AppointmentUpdate = ({ searchParams }) => {
     for (const key in data) {
       console.log(`${key}: ${data[key]}`)
     }
-    // for (const key in filteredData) {
-    //   console.log(`${key}: ${filteredData[key]}`)
-    // }
+    console.log('PACIENTE ID: ' + data.paciente.id)
+    console.log('MEDICO ID: ' + data.medico.id)
   }
 
 
@@ -66,7 +69,7 @@ const AppointmentUpdate = ({ searchParams }) => {
     e.preventDefault();
     testData()
     const jsonData = JSON.stringify(data);
-    await fetch(`${urlConsulta}/${data.id}`, {
+    await fetch(`${urlConsulta}/${searchParams.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +77,7 @@ const AppointmentUpdate = ({ searchParams }) => {
       body: jsonData,
     })
       .then((response) => {
-        if (response.status === 201) {
+        if (response.status === 200) {
           response.json()
           insertSuccess()
         }
@@ -87,24 +90,6 @@ const AppointmentUpdate = ({ searchParams }) => {
   };
 
 
-  /**
-   * Filter special charaters from inserted data
-   */
-  const filterData = () => {
-    const newData = {};
-    for (const key in data) {
-      const value = data[key];
-      if (key === 'data' || key === 'hora') {
-        newData[key] = value.replace(/[^\w]/gi, '');
-      }
-      else {
-        newData[key] = value
-      }
-    }
-    setFilteredData(newData);
-  }
-
-
   return (
     <div>
       <h1 className="text-center py-4">
@@ -115,7 +100,8 @@ const AppointmentUpdate = ({ searchParams }) => {
         <div className="row g-2 mb-4 d-flex justify-content-center">
           {searchParams && (
             <h5 className="col-sm-10">
-              <b>Nome do Paciente: </b> {searchParams.nome} <br />
+              <b>ID: </b> {searchParams.id} <br />
+              <b>Nome do Paciente: </b> {searchParams.nomePaciente} <br />
               <b>Data de Nascimento: </b> {searchParams.dataNascimento} <br />
               <b>Sexo: </b> {searchParams.sexo} <br />
             </h5>
@@ -146,7 +132,7 @@ const AppointmentUpdate = ({ searchParams }) => {
             id="medico" 
             className="form-control" 
             placeholder="Nome do Médico" 
-            value={data.medico}
+            value={data.medico.id}
             onChange={handleChange}>
               <option value="">-- Escolha o Medico Especialista --</option>
               {Object.keys(medicos)
@@ -243,7 +229,7 @@ const AppointmentUpdate = ({ searchParams }) => {
         <div className="d-flex justify-content-center">
           <div className="d-grid col-10">
             <button type="submit" className="btn btn-primary btn-lg">
-                Agendar Consulta
+                Atualizar Consulta
             </button>
           </div>
         </div>

@@ -10,8 +10,8 @@ const AppointmentRegister = ({ searchParams }) => {
   const urlMedico = 'http://localhost:8080/api/v4/test/medicos'
   
   const [data, setData] = useState({
-    paciente: searchParams.id,
-    medico: '',
+    paciente: {id: searchParams.id},
+    medico: {id: ''},
     data: '',
     hora: '',
     formaPagamento: '',
@@ -38,7 +38,11 @@ const AppointmentRegister = ({ searchParams }) => {
     const { name, value } = e.target;
     if (name === "especialidade") {
       setEspecialidade(value);
-    } else {
+    }
+    else if (name === "medico") {
+      setData({ ...data, medico: { id: value } });
+    } 
+    else {
       setData({ ...data, [name]: value });
     }
   };
@@ -49,9 +53,8 @@ const AppointmentRegister = ({ searchParams }) => {
     for (const key in data) {
       console.log(`${key}: ${data[key]}`)
     }
-    // for (const key in filteredData) {
-    //   console.log(`${key}: ${filteredData[key]}`)
-    // }
+    console.log('PACIENTE ID: ' + data.paciente.id)
+    console.log('MEDICO ID: ' + data.medico.id)
   }
 
 
@@ -112,6 +115,7 @@ const AppointmentRegister = ({ searchParams }) => {
         <div className="row g-2 mb-4 d-flex justify-content-center">
           {searchParams && (
             <h5 className="col-sm-10">
+              <b>ID: </b> {searchParams.id} <br />
               <b>Nome do Paciente: </b> {searchParams.nome} <br />
               <b>Data de Nascimento: </b> {searchParams.dataNascimento} <br />
               <b>Sexo: </b> {searchParams.sexo} <br />
@@ -143,7 +147,7 @@ const AppointmentRegister = ({ searchParams }) => {
             id="medico" 
             className="form-control" 
             placeholder="Nome do Médico" 
-            value={data.medico}
+            value={data.medico.id}
             onChange={handleChange}>
               <option value="">-- Escolha o Medico Especialista --</option>
               {Object.keys(medicos)

@@ -123,7 +123,9 @@ const AppointmentList = () => {
                   pathname: '/atualizar-consulta',
                   query: {
                     id: consulta.id,
+                    pacienteId: consulta.paciente.id,
                     nomePaciente: consulta.paciente.nome,
+                    dataNascimento: consulta.paciente.dataNascimento,
                     sexo: consulta.paciente.sexo,
                     nomeMedico: consulta.medico.nome,
                     especialidade: consulta.medico.especialidade,
