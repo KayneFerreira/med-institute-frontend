@@ -109,7 +109,7 @@ const DoctorUpdate = ({ searchParams }) => {
               className="form-control" 
               value={data.dataNascimento} 
               onChange={handleChange} 
-              mask="99/99/9999" 
+              mask="9999-99-99" 
               placeholder="Data de Nascimento"
             />
             <label htmlFor="dataNascimento">Data de Nascimento</label>

@@ -104,8 +104,8 @@ const DoctorRegister = () => {
               className="form-control" 
               value={data.dataNascimento} 
               onChange={handleChange} 
-              mask="99/99/9999" 
-              placeholder="Data de Nascimento"
+              mask="9999-99-99" 
+              placeholder="AAAA-MM-DD"
             />
             <label htmlFor="dataNascimento">Data de Nascimento</label>
           </div>

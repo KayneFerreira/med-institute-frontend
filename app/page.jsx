@@ -9,8 +9,8 @@ export default function Home() {
   })
   
   return (
-    <div className='container d-flex flex-wrap-reverse align-items-center py-5'>
-      <div className="px-5 text-lg-end text-center">
+    <div className='container d-flex flex-xl-row flex-sm-column-reverse flex-wrap-reverse align-items-center py-5'>
+      <div className="px-5 text-lg-end text-center py-5">
         <h1>Instituto Med Center</h1>
         <h5>Medicina de qualidade ao seu alcance.</h5>
         <div>
