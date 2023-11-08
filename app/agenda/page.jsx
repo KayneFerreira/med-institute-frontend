@@ -32,6 +32,7 @@ const AppointmentList = () => {
     .then((response) => {
       if (response.status === 204) {
         deleteSuccess(nome)
+        setTimeout(() => window.location.reload(), 2000);
       }
       else {
         deleteFailed(response.status)
