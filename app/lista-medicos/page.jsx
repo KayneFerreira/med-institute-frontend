@@ -85,7 +85,7 @@ const ListDoctors = () => {
         Lista de Medicos
       </h1>
 
-      <table className="table table-striped">
+      <table className="table table-striped container text-nowrap">
         <thead>
           <tr>
             <th scope="col">#</th>

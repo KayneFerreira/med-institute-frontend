@@ -84,7 +84,7 @@ const ListClient = () => {
       <h1 className='text-center py-4'>
         Lista de Pacientes
       </h1>
-      <table className="table table-striped container">
+      <table className="table table-striped container text-nowrap">
         <thead>
           <tr>
             <th scope="col">#</th>

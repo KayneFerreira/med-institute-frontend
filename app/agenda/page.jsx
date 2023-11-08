@@ -84,7 +84,7 @@ const AppointmentList = () => {
         Consultas Marcadas
       </h1>
 
-      <table className="table table-striped">
+      <table className="table table-striped container text-nowrap">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -166,6 +166,10 @@ const AppointmentList = () => {
                                <li><b>Horario da consulta: </b> {item.hora}</li>
                                <li><b>Telefone do paciente: </b> {item.paciente.telefone}</li>
                                <li><b>Email do paciente: </b> {item.paciente.email}</li>
+                               <li><b>Forma de Pagamento: </b> {item.formaPagamento}</li>
+                               <li><b>Valor: </b>R$ {item.valor}</li>
+                               <li><b>Convênio Médico: </b> {item.convenio}</li>
+                               <li><b>Número da Carteira: </b> {item.numeroCarteira}</li>
                             </ul>
                           </div>
                         </div>

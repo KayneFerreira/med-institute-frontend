@@ -62,3 +62,21 @@ export const actionCancelled = () => {
     'info'
   )
 }
+
+
+export const cpfNotValid = () => {
+  Swal.fire(
+    'CPF inválido!',
+    'Verifique se digitou corretamente seu CPF.',
+    'warning'
+  )
+}
+
+
+export const requiredFields = () => {
+  Swal.fire(
+    'Campos obrigatórios em branco!',
+    'Verifique se preencheu todos os campos obrigatórios do formulário.',
+    'warning'
+  )
+}

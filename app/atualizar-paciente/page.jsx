@@ -94,9 +94,10 @@ const ClientUpdate = ({ searchParams }) => {
       
       <form className="px-4" onSubmit={handleSubmit}>
         <div className="row g-2 mb-4 d-flex justify-content-center">
+        <h5 className="col-sm-10">Os campos contendo (*) são de preenchimento obrigatório</h5>
           <div className="form-floating d-flex justify-content-center col-sm-10">
             <input name="nome" id="nome" type="text" className="form-control" placeholder="Nome Completo" value={data.nome} onChange={handleChange} />
-            <label htmlFor="nome">Nome Completo</label>
+            <label htmlFor="nome">Nome Completo *</label>
           </div>
         </div>
         <div className="row g-2 mb-4 d-flex justify-content-center">
@@ -110,7 +111,7 @@ const ClientUpdate = ({ searchParams }) => {
               mask="9999-99-99" 
               placeholder="AAAA-MM-DD"
             />
-            <label htmlFor="dataNascimento">Data de Nascimento</label>
+            <label htmlFor="dataNascimento">Data de Nascimento *</label>
           </div>
           <div className="form-floating col-sm-3">
             <select name="sexo" id="sexo" type="text" className="form-select" value={data.sexo} onChange={handleChange}>
@@ -118,7 +119,7 @@ const ClientUpdate = ({ searchParams }) => {
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
             </select>
-            <label htmlFor="sexo">Sexo</label>
+            <label htmlFor="sexo">Sexo *</label>
           </div>
           <div className="form-floating col-sm-3">
             <InputMask 
@@ -130,7 +131,7 @@ const ClientUpdate = ({ searchParams }) => {
               mask="999.999.999-99" 
               placeholder="CPF" 
             />
-            <label htmlFor="cpf">CPF</label>
+            <label htmlFor="cpf">CPF *</label>
           </div>
         </div>
 
@@ -156,11 +157,11 @@ const ClientUpdate = ({ searchParams }) => {
         <div className="row g-2 mb-4 d-flex justify-content-center">
           <div className="form-floating col-sm-5">
             <input name="endereco" id="endereco" type="text" className="form-control" placeholder="Endereço" value={data.endereco} onChange={handleChange} />
-            <label htmlFor="endereco">Endereço</label>
+            <label htmlFor="endereco">Endereço *</label>
           </div>
           <div className="form-floating col-sm-2">
             <input name="numero" id="numero" type="number" className="form-control" placeholder="Número" value={data.numero} onChange={handleChange} />
-            <label htmlFor="numero">Número</label>
+            <label htmlFor="numero">Número *</label>
           </div>
           <div className="form-floating col-sm-3">
             <InputMask 
@@ -184,11 +185,11 @@ const ClientUpdate = ({ searchParams }) => {
                 return <option key={i} value={value}>{value}</option>
               })}
             </select>
-            <label htmlFor="estado">Estado</label>
+            <label htmlFor="estado">Estado *</label>
           </div>
           <div className="form-floating col-sm-6">
             <input name="cidade" id="cidade" type="text" className="form-control" placeholder="Cidade" value={data.cidade} onChange={handleChange} />
-            <label htmlFor="cidade">Cidade</label>
+            <label htmlFor="cidade">Cidade *</label>
           </div>
         </div>
 
