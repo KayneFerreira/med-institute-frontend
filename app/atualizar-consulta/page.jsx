@@ -1,8 +1,10 @@
 'use client'
 import React from "react";
 import { useState, useEffect } from "react";
-import { InputMask } from "primereact/inputmask";
 import { insertFailed, insertSuccess } from "../components/Alerts"
+import DatePicker from "../components/DataPicker";
+import TimePicker from "../components/TimePicker";
+import moment from 'moment'; 
 
 
 const AppointmentUpdate = ({ searchParams }) => {
@@ -25,7 +27,33 @@ const AppointmentUpdate = ({ searchParams }) => {
   
   const [medicos, setMedico] = useState({})
   const [especialidade, setEspecialidade] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
+
+  /**
+   * Handle data change on DatePicker
+   */
+  const handleDateChange = (name, date) => {
+    const formattedDate = date.format("YYYY-MM-DD")
+    setData( { ...data, [name]: formattedDate } )
+    setSelectedDate(date);
+  };
+
+
+  /**
+   * Handle time change on TimePicker
+   */
+  const handleTimeChange = (name, time) => {
+    const formattedTime = moment(time, "HH:mm").format("HH:mm");
+    setData({ ...data, [name]: formattedTime });
+    setSelectedTime(time)
+  };
+
+
+  /**
+   * Use effect for listing all doctors
+   */
   useEffect(() => {
     fetch(urlMedico)
       .then((response) => response.json())
@@ -90,6 +118,9 @@ const AppointmentUpdate = ({ searchParams }) => {
   };
 
 
+  /**
+   * RETURN 
+   */
   return (
     <div>
       <h1 className="text-center py-4">
@@ -147,27 +178,31 @@ const AppointmentUpdate = ({ searchParams }) => {
         )}
 
         <div className="row g-2 mb-4 d-flex justify-content-center">
-          <div className="form-floating col-sm-2">
-            <input 
+          <div className="form-text col-sm-3">
+            <label htmlFor="data">Data da Consulta</label>
+            <DatePicker 
             name="data" 
             id="data"
+            type="text" 
             className="form-control" 
+            dateFormat="yyyy-MM-dd"
             value={data.data} 
             onChange={handleChange} 
-            placeholder="Data da Consulta" />
-            <label htmlFor="data">Data da Consulta</label>
+            selectedDate={selectedDate} 
+            handleDateChange={handleDateChange} />
           </div>
 
-          <div className="form-floating col-sm-2">
-            <input 
+          <div className="form-text col-sm-2">
+            <label htmlFor="hora">Horário</label>
+            <TimePicker 
             name="hora" 
             id="hora" 
             type="text" 
             className="form-control" 
-            placeholder="Horário" 
             value={data.hora} 
-            onChange={handleChange} />
-            <label htmlFor="hora">Horário</label>
+            onChange={handleChange} 
+            selectedTime={selectedTime}
+            handleTimeChange={handleTimeChange} />
           </div>
 
           <div className="form-floating col-sm-3">
@@ -187,7 +222,7 @@ const AppointmentUpdate = ({ searchParams }) => {
             <label htmlFor="formaPagamento">Forma de Pagamento</label>
           </div>
 
-          <div className="form-floating col-sm-3">
+          <div className="form-floating col-sm-2">
             <input 
             name="valor" 
             id="valor" 
