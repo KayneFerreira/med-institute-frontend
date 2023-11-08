@@ -42,7 +42,8 @@ const AppointmentRegister = ({ searchParams }) => {
    * Handle time change on TimePicker
    */
   const handleTimeChange = (name, time) => {
-    const formattedTime = moment(time, "HH:mm").format("HH:mm");
+    const roundedTime = moment(time).minutes(Math.round(time.minute() / 15) * 15);
+    const formattedTime = moment(roundedTime, "HH:mm").format("HH:mm");
     setData({ ...data, [name]: formattedTime });
     setSelectedTime(time)
   };
@@ -127,7 +128,6 @@ const AppointmentRegister = ({ searchParams }) => {
         <div className="row g-2 mb-4 d-flex justify-content-center">
           {searchParams && (
             <h5 className="col-sm-10">
-              <b>ID: </b> {searchParams.id} <br />
               <b>Nome do Paciente: </b> {searchParams.nome} <br />
               <b>Data de Nascimento: </b> {searchParams.dataNascimento} <br />
               <b>Sexo: </b> {searchParams.sexo} <br />

@@ -131,7 +131,6 @@ const AppointmentUpdate = ({ searchParams }) => {
         <div className="row g-2 mb-4 d-flex justify-content-center">
           {searchParams && (
             <h5 className="col-sm-10">
-              <b>ID: </b> {searchParams.id} <br />
               <b>Nome do Paciente: </b> {searchParams.nomePaciente} <br />
               <b>Data de Nascimento: </b> {searchParams.dataNascimento} <br />
               <b>Sexo: </b> {searchParams.sexo} <br />
