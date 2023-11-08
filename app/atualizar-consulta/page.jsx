@@ -45,7 +45,8 @@ const AppointmentUpdate = ({ searchParams }) => {
    * Handle time change on TimePicker
    */
   const handleTimeChange = (name, time) => {
-    const formattedTime = moment(time, "HH:mm").format("HH:mm");
+    const roundedTime = moment(time).minutes(Math.round(time.minute() / 15) * 15);
+    const formattedTime = moment(roundedTime, "HH:mm").format("HH:mm");
     setData({ ...data, [name]: formattedTime });
     setSelectedTime(time)
   };

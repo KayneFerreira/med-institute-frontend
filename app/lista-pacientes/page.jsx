@@ -73,9 +73,9 @@ const ListClient = () => {
   /**
    * Set client details
    */
-  const [item, setItem] = useState()
-  const clientDetails = (item) => {
-    setItem(item)
+  const [items, setItems] = useState()
+  const clientDetails = (items) => {
+    setItems(items)
   }
 
 
@@ -163,7 +163,7 @@ const ListClient = () => {
                 
                 <div className="modal fade" id="clientDetails" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div className="modal-dialog">
-                    {item && (
+                    {items && (
                       <div className="modal-content">
                         <div className="modal-header">
                           <h1 className="modal-title fs-5" id="exampleModalLabel">Detalhes do Paciente</h1>
@@ -172,9 +172,9 @@ const ListClient = () => {
                         <div className="modal-body">
                           <div>
                             <ul>
-                              {Object.keys(item).map((key, i) => {
+                              {Object.keys(items).map((key, i) => {
                                 return <li key={i}>
-                                  <b>{toTitleCase(key)}</b>: {item[key]}
+                                  <b>{toTitleCase(key)}</b>: {items[key]}
                                 </li> 
                               })}
                             </ul>

@@ -21,6 +21,18 @@ const AppointmentRegister = ({ searchParams }) => {
     convenio: '',
     numeroCarteira: '',
   })
+
+
+  /**
+   * Check for existing appointments
+   */
+  const [consultas,  setConsultas] = useState([])
+  useEffect(() => {
+    fetch(urlConsulta)
+      .then((response) => response.json())
+      .then((data) => setConsultas(data))
+      .catch((error) => console.error(error));
+  }, []);
   
   const [medicos, setMedico] = useState({})
   const [especialidade, setEspecialidade] = useState("");
