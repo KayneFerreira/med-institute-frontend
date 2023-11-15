@@ -5,6 +5,7 @@ import { insertFailed, insertSuccess } from "../components/Alerts"
 import DatePicker from "../components/DataPicker";
 import TimePicker from "../components/TimePicker";
 import moment from 'moment'; 
+import { tabelaPrecos } from "../resources/Content";
 
 
 const AppointmentRegister = ({ searchParams }) => {
@@ -36,6 +37,7 @@ const AppointmentRegister = ({ searchParams }) => {
   
   const [medicos, setMedico] = useState({})
   const [especialidade, setEspecialidade] = useState("");
+  const especialidades = [...new Set(Object.values(medicos).map(medico => medico.especialidade))];
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
 
@@ -79,6 +81,7 @@ const AppointmentRegister = ({ searchParams }) => {
     const { name, value } = e.target;
     if (name === "especialidade") {
       setEspecialidade(value);
+      setData({ ...data, [name]: value, valor: "R$" + tabelaPrecos[value] });
     }
     else if (name === "medico") {
       setData({ ...data, medico: { id: value } });
@@ -136,6 +139,7 @@ const AppointmentRegister = ({ searchParams }) => {
         Registro de Consulta
       </h1>
       
+      {medicos && (
       <form className="px-4" onSubmit={handleSubmit}>
         <div className="row g-2 mb-4 d-flex justify-content-center">
           {searchParams && (
@@ -146,8 +150,7 @@ const AppointmentRegister = ({ searchParams }) => {
             </h5>
           )}
         </div>
-
-        {medicos && (
+        
         <div className="row g-2 mb-4 d-flex justify-content-center">
           <div className="form-floating col-sm-4">
             <select 
@@ -158,8 +161,8 @@ const AppointmentRegister = ({ searchParams }) => {
             value={data.especialidade} 
             onChange={handleChange}>
               <option value="">-- Escolha a Especialidade --</option>
-              {Object.keys(medicos).map((key, i) => {
-                return <option key={i}> { medicos[key].especialidade } </option> 
+              {especialidades.map((esp, i) => {
+                return <option key={i}> { esp } </option> 
               })}
             </select>
             <label htmlFor="especialidade">Especialidade</label>
@@ -183,7 +186,6 @@ const AppointmentRegister = ({ searchParams }) => {
             <label htmlFor="medico">Nome do Médico</label>
           </div>
         </div>
-        )}
 
         <div className="row g-2 mb-4 d-flex justify-content-center">
           <div className="form-text col-sm-3">
@@ -238,7 +240,8 @@ const AppointmentRegister = ({ searchParams }) => {
             className="form-control" 
             placeholder="Valor Total" 
             value={data.valor} 
-            onChange={handleChange} />
+            onChange={handleChange} 
+            readOnly/>
             <label htmlFor="valor">Valor Total</label>
           </div>
         </div>
@@ -277,6 +280,7 @@ const AppointmentRegister = ({ searchParams }) => {
           </div>
         </div>
       </form>
+      )}
     </div>
   )
 }

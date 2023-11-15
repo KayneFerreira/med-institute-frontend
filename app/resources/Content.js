@@ -27,3 +27,13 @@ export const estados = [
   "Sergipe",
   "Tocantins",
 ];
+
+
+export const tabelaPrecos = {
+  "": 0,
+  "Neurologia": 200,
+  "Ortopedia": 150,
+  "Otorrinolaringologia": 100,
+  "Traumatologia": 250,
+  "Psicologia": 50
+}
